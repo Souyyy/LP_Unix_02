@@ -83,10 +83,63 @@ L'information **TIME** correspond au temps total CPU utilisé par le processus.
 
 --------
 
-## 3 
+Afin de savoir le processus qui utilise le plus le processeur, on utilise la commande `top` qui nous renvoie ceci:
+
+```
+PID UTIL.     PR  NI    VIRT    RES    SHR S  %CPU  %MEM    TEMPS+ COM.
+559 root      20   0   17996  11068   9252 S   0,3   0,5   0:00.61 sshd
+```
+
+Donc le processus qui utilise le plus le processeur est `sshd`.
+
+--------
+
+
+
+--------
+
+Pour savoir a quel heure ma machine a démarrée j'utilise la commande `who -b`.
+```
+root@serveur1:~# who -b
+         démarrage système 2024-10-15 22:47
+```
+
+L'autre commande permettant de savoir le temps depuis lequel le serveur tourne et la commande `uptime`qui renvoie ceci :
+
+```
+root@serveur1:~# uptime
+ 22:56:53 up 9 min,  2 users,  load average: 0,01, 0,04, 0,02
+```
+
+--------
+
+## 3  Arrêt d’un processus
 ###
 
-## 4 
-###
+## 4 Les tubes
 
-## 5
+Selon la commande `man`, la différence entre les commandes `tee` et `cat` réside dans leurs fonctions respectives. En effet, `tee` permet de lire des données depuis l'entrée standard et d'écrire ces données à la fois sur la sortie standard et dans des fichiers spécifiés.
+
+En revanche, `cat` (abréviation de "concatenate") est utilisé pour concaténer des fichiers et les afficher sur la sortie standard. Cette commande permet principalement de combiner le contenu de plusieurs fichiers et de l'afficher.
+
+--------
+
+La commande `ls | cat` permet de lister le contenu du répertoire courant.
+
+--------
+
+La commande `ls -l | cat > liste` permet de lister les fichiers et répertoires en détail dans un fichier nommé liste.
+
+--------
+
+La commande `ls -l | tee liste` permet de lister les fichiers et répertoires en détail et envoie le résultat à la fois à l'écran et dans un fichier nommé liste.
+
+--------
+
+La commande `ls -l | tee liste | wc -l` permet de lister les fichiers et répertoires en détail, enregistre cette sortie dans un fichier nommé liste, puis compte le nombre de lignes de cette sortie.
+
+## 5 Journal système rsyslog
+
+Tout d'abord j'ai du installé rsyslog avec la commande `apt install rsyslog`.
+
+Une fois installé 
