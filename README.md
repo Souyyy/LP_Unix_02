@@ -94,7 +94,7 @@ Donc le processus qui utilise le plus le processeur est `sshd`.
 
 --------
 
-
+D'après la commande man, en faisant `ps -p 1`, j'obtient le premier processus lancé après le démarrage du système, soit `systemd`.
 
 --------
 
@@ -113,8 +113,36 @@ root@serveur1:~# uptime
 
 --------
 
+Afin de savoir le nombre aproximatif de processus créés depuis le démarrage de ma machine, c'est en faisant la commande `top`, je navigue vers le bas et je regarde le PID le plus haut, soit dans mon cas envrions **636**.
+
 ## 3  Arrêt d’un processus
-###
+
+Une fois les 2 scripts créés et executer par la commande `./date.sh &` et `./date-toto.sh &` et mis en arrière plan par la combinaison `CTRL Z` il fallait ensuite arreter les 2 processus.
+
+Pour ce faire il faut ramener au premier plan les processus. Ainsi on execute les commandes suivante:
+
+`job` : afin de voir les processus en arrière plan.
+
+`fg %1` et `fg %2` Pour ramener au premier plan le processus.
+
+Enfin une fois le processus au premier plan il suffit de faire la combinaison `CTRL C`.
+
+--------
+
+En utilisant les commandes `ps` et `kill`, cela revient au même:
+
+`ps` : afin de voir les processus en arrière plan et leur PID.
+
+`kill -9 <PID>` Pour quitter le processus en fonction du PID.
+
+--------
+
+**date.sh**
+Le script date.sh est conçu pour afficher l'heure actuelle en continu. Il commence par indiquer qu'il doit être exécuté dans un environnement shell. Ensuite, une boucle infinie est utilisée pour répéter les instructions. À chaque itération, le script se met en pause pendant 1 seconde. Ensuite, il affiche le mot "date" suivi de l'heure actuelle formatée en heures, minutes et secondes.
+
+
+**date-toto.sh**
+Le script date-toto.sh fonctionne de manière similaire au premier script, mais il affiche une heure qui correspond à il y a 5 heures. Comme dans le premier script, il commence par #!/bin/sh pour spécifier le shell. La boucle infinie permet d'exécuter les instructions en continu, avec une pause d'une seconde entre chaque itération.
 
 ## 4 Les tubes
 
@@ -142,4 +170,38 @@ La commande `ls -l | tee liste | wc -l` permet de lister les fichiers et répert
 
 Tout d'abord j'ai du installé rsyslog avec la commande `apt install rsyslog`.
 
-Une fois installé 
+Une fois installé on execute la commade `systemctl status rsyslog` afin de savoir le PID du deamon et d'autres informations falcultatives.
+
+```
+root@serveur1:~# systemctl status rsyslog
+● rsyslog.service - System Logging Service
+     Loaded: loaded (/lib/systemd/system/rsyslog.service; enabled; preset: enab>
+     Active: active (running) since Tue 2024-10-15 23:17:17 CEST; 26s ago
+TriggeredBy: ● syslog.socket
+       Docs: man:rsyslogd(8)
+             man:rsyslog.conf(5)
+             https://www.rsyslog.com/doc/
+   Main PID: 919 (rsyslogd)
+      Tasks: 4 (limit: 2315)
+     Memory: 1.2M
+        CPU: 9ms
+     CGroup: /system.slice/rsyslog.service
+             └─919 /usr/sbin/rsyslogd -n -iNONE
+
+oct. 15 23:17:17 serveur1 systemd[1]: Starting rsyslog.service - System Logging>
+oct. 15 23:17:17 serveur1 systemd[1]: Started rsyslog.service - System Logging >
+oct. 15 23:17:17 serveur1 rsyslogd[919]: imuxsock: Acquired UNIX socket '/run/s>
+oct. 15 23:17:17 serveur1 rsyslogd[919]: [origin software="rsyslogd" swVersion=>
+lines 1-18/18 (END)
+```
+
+Ainsi le PID du deamon est **919**.
+
+--------
+
+
+
+--------
+
+`Cron` est un programme qui permet aux utilisateurs des systèmes Unix d’exécuter automatiquement des scripts, des commandes ou des logiciels à une date et une heure spécifiée à l’avance, ou selon un cycle défini à l’avance.
+
