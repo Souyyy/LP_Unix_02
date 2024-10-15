@@ -851,3 +851,11 @@ Pour savoir notre carte reseaux ou le modèle de processeur linux, il faut cherc
 [    2.133176] e1000 0000:00:03.0 eth0: Intel(R) PRO/1000 Network Connection
 [    2.231468] ata4: SATA link up 3.0 Gbps (SStatus 123 SControl 300)
 ```
+
+## Source
+
+https://www.debian.org/
+
+https://linuxfr.org/forums/
+
+https://forum.ubuntu-fr.org/
