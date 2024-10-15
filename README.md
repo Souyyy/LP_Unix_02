@@ -3,8 +3,18 @@
 ## 1 Secure Shell : SSH
 ### 1.1 Connection ssh root
 
+Pour pouvoir se connecter en tant que root, il a fallut modifier dans `sshd_config` les lignes suivantes :
+
+```
+PasswordAuthentication no
+PermitRootLogin prohibit-password
 ```
 
+par
+
+```
+PasswordAuthentication yes
+PermitRootLogin yes
 ```
 
 ### 1.2 Authentification par clef / Génération de clefs
@@ -828,8 +838,14 @@ root@serveur1:~# dmesg
 
 Pour savoir notre carte reseaux ou le modèle de processeur linux, il faut chercher parmis c'est lignes les informations qui nous interesses par exemple:
 
+**Processeur linux:**
 
-Carte Reseaux :
+```
+[    0.000000] Linux version 6.1.0-25-amd64 (debian-kernel@lists.debian.org) (gcc-12 (Debian 12.2.0-14) 12.2.0, GNU ld (GNU Binutils for Debian) 2.40) #1 SMP PREEMPT_DYNAMIC Debian 6.1.106-3 (2024-08-26)
+```
+
+**Carte Reseaux :**
+
 ```
 [    2.133167] e1000 0000:00:03.0 eth0: (PCI:33MHz:32-bit) 08:00:27:12:3e:86
 [    2.133176] e1000 0000:00:03.0 eth0: Intel(R) PRO/1000 Network Connection
